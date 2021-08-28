@@ -14,6 +14,7 @@ import otpImg from "../../../assets/Mobile-OTP.svg";
 import mobileImg from "../../../assets/mobile.svg";
 import ReferalImg from "../../../assets/Referral Code grey.svg";
 import { useHistory } from "react-router-dom";
+import { getLocation } from "../Helper/Helper";
 function VerifyContact() {
   const [contact, setContact] = useState("");
   const [otp, setOtp] = useState("");
@@ -45,6 +46,7 @@ function VerifyContact() {
   //  mobile No checking
   useEffect(() => {
     if (contact.length === 10) {
+      getLocation();
       setBtnDisabled(false);
       smsVerify();
       return;
