@@ -1,27 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import TextField from '@material-ui/core/TextField';
-import $ from 'jquery';
-import SERVER_ID from '../Configure/configure';
-import { Container, Row, Col } from 'reactstrap';
-import Button from '@material-ui/core/Button';
-import Image from 'react-bootstrap/Image';
-import './PanBankEmail.css';
+import React, { useState, useEffect } from "react";
+import TextField from "@material-ui/core/TextField";
+import $ from "jquery";
+import SERVER_ID from "../Configure/configure";
+import { Container, Row, Col } from "reactstrap";
+import Button from "@material-ui/core/Button";
+import Image from "react-bootstrap/Image";
+import "./PanBankEmail.css";
+import startImg from "../../../images/Get_Started_Illustration.png";
+import moment from "moment";
+import { useHistory } from "react-router";
 function PanBankEmail() {
+  const history = useHistory();
   const [inputs, setInputs] = useState({
-    email: '',
-    otp: '',
-    pan: '',
-    dob: '',
-    AcNo: '',
-    ifsc: '',
+    email: "",
+    otp: "",
+    pan: "",
+    dob: "",
+    AcNo: "",
+    ifsc: "",
   });
-  useEffect(() => {
-    let regEmail =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!regEmail.test.email) {
-      // newErrors.email = "Enter a valid email id";
-    }
-  }, [inputs.email]);
+  // useEffect(() => {
+  //   let regEmail =
+  //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   if (!regEmail.test.email) {
+  //     // newErrors.email = "Enter a valid email id";
+  //   }
+  // }, [inputs.email]);
   const handleInputChange = (event) => {
     let value = event.target.value;
     let name = event.target.name;
@@ -34,22 +38,20 @@ function PanBankEmail() {
     });
   };
   const consoleData = () => {
-    console.log(inputs.email);
+    history.push("/personalInfo");
+    console.log(inputs);
   };
 
-  $('#input_capital').keyup(function (e) {
+  $("#input_capital").keyup(function (e) {
     var str = $(this).val();
-    $('#input_capital').val(str.toUpperCase());
+    $("#input_capital").val(str.toUpperCase());
   });
   return (
     <div>
       <Container>
         <Row>
           <Col className="mt-5" md="6">
-            <Image
-              src={require('../../../images/Get_Started_Illustration.png')}
-              fluid
-            />
+            <Image src={startImg} fluid />
           </Col>
           <Col md="6" className="div-PanEmail">
             <Row>
@@ -63,18 +65,13 @@ function PanBankEmail() {
               <Col className="" sm="12" md="6" className="margin-pan">
                 <TextField
                   type="text"
-                  inputProps={{ style: { textTransform: 'capitalize' } }}
-                  className=" margin-pan"
-                  id="input_capital"
+                  // className=" margin-pan"
                   variant="outlined"
+                  autoComplete="off"
                   name="email"
                   defaultValue={inputs.email}
                   onChange={handleInputChange}
-                  onBlur={consoleData}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
+                  // onBlur={consoleData}
                   className="form-control"
                   label="Enter Email ID"
                 />
@@ -83,14 +80,10 @@ function PanBankEmail() {
                 <TextField
                   type="password"
                   variant="outlined"
+                  autoComplete="off"
                   name="otp"
                   value={inputs.otp}
                   onChange={handleInputChange}
-                  // value={pan}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
                   className="form-control"
                   label="Enter OTP sent on mail"
                 />
@@ -98,72 +91,60 @@ function PanBankEmail() {
             </Row>
             <Row className="mt-2">
               <Col className="mt-3" sm="12" md="6" className="margin-pan">
-                {' '}
+                {" "}
                 <TextField
                   type="text"
+                  // id="input_capital"
                   variant="outlined"
+                  autoComplete="off"
                   name="pan"
                   value={inputs.pan}
                   onChange={handleInputChange}
-                  // value={pan}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
                   className="form-control"
                   label="Enter PAN Number"
                 />
               </Col>
               <Col className="mt-3" sm="12" md="6" className="margin-pan">
-                {' '}
+                {" "}
                 <TextField
-                  type="date"
-                  id="outlined-basic"
-                  variant="outlined"
+                  id="date"
                   name="dob"
-                  value={inputs.dob}
-                  onChange={handleInputChange}
-                  // value={pan}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
+                  variant="outlined"
+                  label="Birthday"
+                  type="date"
+                  // defaultValue={moment().format("MM-DD-YYYY")}
                   className="form-control"
-                  // label="Enter DOB"
+                  onChange={handleInputChange}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
               </Col>
             </Row>
             <Row className="mt-2">
               <Col className="mt-3" sm="12" md="6" className="margin-pan">
-                {' '}
+                {" "}
                 <TextField
                   type="text"
                   variant="outlined"
+                  autoComplete="off"
                   name="AcNo"
                   value={inputs.AcNo}
                   onChange={handleInputChange}
-                  // value={pan}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
                   className="form-control"
                   label="Enter Bank A/C Number"
                 />
               </Col>
               <Col className="mt-3" sm="12" md="6" className="margin-pan">
-                {' '}
+                {" "}
                 <TextField
                   type="text"
+                  // id="input_capital"
                   variant="outlined"
-                  // value={pan}
+                  autoComplete="off"
                   name="ifsc"
                   value={inputs.ifsc}
                   onChange={handleInputChange}
-                  // onChange={(e) => {
-                  //   let cData = e.target.value.toUpperCase();
-                  //   setPan(cData);
-                  // }}
                   className="form-control"
                   label="Enter IFSC Code"
                 />

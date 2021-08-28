@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import './PersonalInfo.css';
-import { Container, Row, Col } from 'reactstrap';
-import { Image, Figure } from 'react-bootstrap';
-import Digi from '../../../images/digiLocker.jpg';
-import { makeStyles } from '@material-ui/core';
-import { useForm } from 'react-hook-form';
-import Button from '@material-ui/core/Button';
+import { Container, Row, Col } from "reactstrap";
+import { Image } from "react-bootstrap";
+import Digi from "../../../images/digiLocker.jpg";
+import aadharImg from "../../../images/Aadhar_KYC_Illustration.png";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router";
 
 const AdhaarKyc = () => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/UploadUi");
+  };
   return (
     <div>
       <Container className="container-md">
@@ -15,7 +19,7 @@ const AdhaarKyc = () => {
           <Col md="6">
             <div className="form-info">
               <Row>
-                <Col style={{ marginLeft: '30px' }}>
+                <Col style={{ marginLeft: "30px" }}>
                   <h3 className="float-left ml=2">Adhaar KYC</h3>
                   <br />
                   <hr className="hr-personal color-gradiant" />
@@ -27,7 +31,7 @@ const AdhaarKyc = () => {
               <br />
               <Container>
                 <Col>
-                  <text style={{ fontSize: '13px' }}>
+                  <text style={{ fontSize: "13px" }}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Dolores quae, eum odit ipsum vitae officia, repellat, dicta
                     itaque doloribus id nihil eius corporis blanditiis? Iste
@@ -42,23 +46,23 @@ const AdhaarKyc = () => {
                 <Button
                   // fullWidth="true"
                   type="submit"
-                  // onClick={smsVerify}
+                  onClick={handleClick}
                   className="btn-comman text-white"
-                  style={{ textTransform: 'capitalize', marginLeft: '10px' }}
+                  style={{ textTransform: "capitalize", marginLeft: "10px" }}
                 >
                   Contine to DigiLocker
                 </Button>
                 <br />
                 <br />
                 <Col>
-                  <text style={{ fontSize: '13px' }}>
+                  <text style={{ fontSize: "13px" }}>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Aperiam voluptates sed, provident,
                   </text>
                 </Col>
                 <br />
                 <Col>
-                  <text style={{ fontSize: '13px' }}>
+                  <text style={{ fontSize: "13px" }}>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   </text>
                 </Col>
@@ -66,10 +70,7 @@ const AdhaarKyc = () => {
             </div>
           </Col>
           <Col className="mt-5" md="6">
-            <Image
-              src={require('../../../images/Aadhar_KYC_Illustration.png')}
-              fluid
-            />
+            <Image src={aadharImg} fluid />
           </Col>
         </Row>
       </Container>

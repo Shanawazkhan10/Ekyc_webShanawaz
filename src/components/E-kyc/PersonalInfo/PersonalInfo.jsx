@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
-import './PersonalInfo.css';
-import TextField from '@material-ui/core/TextField';
-import { Container, Row, Col } from 'reactstrap';
-import Image from 'react-bootstrap/Image';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles, MenuItem } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import { useForm, Controller } from 'react-hook-form';
-import Button from '@material-ui/core/Button';
-
+import React, { useState } from "react";
+import "./PersonalInfo.css";
+import TextField from "@material-ui/core/TextField";
+import { Container, Row, Col } from "reactstrap";
+import Image from "react-bootstrap/Image";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import { makeStyles, MenuItem } from "@material-ui/core";
+import InputLabel from "@material-ui/core/InputLabel";
+import { useForm, Controller } from "react-hook-form";
+import Button from "@material-ui/core/Button";
+import PersonalImg from "../../../images/Personal_Details_Illustration.png";
+import { useHistory } from "react-router";
 const PersonalInfo = () => {
+  const history = useHistory();
   const [inputs, setInputs] = useState({
-    mstatus: '',
-    income: '',
-    political: '',
-    motherName: '',
-    fatherName: '',
+    mstatus: "",
+    income: "",
+    gender: "",
+    political: "",
+    occupation: "",
+    experience: "",
+    motherName: "",
+    fatherName: "",
   });
   const { control } = useForm();
   const useStyles = makeStyles((theme) => ({
@@ -33,9 +38,10 @@ const PersonalInfo = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     console.log(inputs);
-    window.location = '/PanOrc';
+    history.push("/AccountOpen");
+    // window.location = "/PanOrc";
     // console.log(state);
   };
   return (
@@ -43,11 +49,7 @@ const PersonalInfo = () => {
       <Container>
         <Row>
           <Col className="m-4" md="6">
-            <Image
-              className="login-img-res"
-              src={require('../../../images/Personal_Details_Illustration.png')}
-              fluid
-            />
+            <Image className="login-img-res" src={PersonalImg} fluid />
           </Col>
           <Col>
             <div className="form-info">
@@ -64,7 +66,9 @@ const PersonalInfo = () => {
                     <TextField
                       type="text"
                       id="fieldSelectorname"
-                      // onChange={handleNameChange}
+                      name="fatherName"
+                      value={inputs.fatherName}
+                      onChange={handleInputChange}
                       className="form-control"
                       label="Father's Full Name"
                       autoComplete="off"
@@ -78,7 +82,9 @@ const PersonalInfo = () => {
                     <TextField
                       type="text"
                       id="fieldSelectorname"
-                      // onChange={handleNameChange}
+                      name="motherName"
+                      value={inputs.motherName}
+                      onChange={handleInputChange}
                       className="form-control"
                       label="Mother's Full Name"
                       autoComplete="off"
@@ -93,71 +99,62 @@ const PersonalInfo = () => {
                     <FormControl
                       variant="outlined"
                       key="Marital Status"
-                      // error={Boolean(errors.appliance)}
                       fullWidth
                     >
-                      <InputLabel required={true}>Marital Status</InputLabel>
+                      <InputLabel required={true}>Marital dddddStatus</InputLabel>
                       <Controller
-                        render={(props) => (
+                        render={() => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="mstatus"
+                            defaultValue={inputs.mstatus}
+                            onChange={handleInputChange}
                             label="Marital Status"
                           >
                             <MenuItem value="" disabled>
                               Marital Status
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>Single</MenuItem>
-                            <MenuItem value={'Freezer'}>Married</MenuItem>
-                            <MenuItem value={'Ice Maker'}>Divorced</MenuItem>
-                            {/* <MenuItem value={"Range"}>Range</MenuItem>
-                  <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
+                            <MenuItem value={"Single"}>Single</MenuItem>
+                            <MenuItem value={"Married"}>Married</MenuItem>
+                            <MenuItem value={"Divorced"}>Divorced</MenuItem>
                           </Select>
                         )}
                         name="appliance"
                         control={control}
-                        defaultValue=""
+                        // defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
-                      {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
                     </FormControl>
                   </div>
                 </Col>
                 <Col md="6" sm="12" className="mt-3">
                   <div className="form-group  master-textField">
-                    <FormControl
-                      variant="outlined"
-                      key="Appliances"
-                      // error={Boolean(errors.appliance)}
-                      fullWidth
-                    >
+                    <FormControl variant="outlined" key="Appliances" fullWidth>
                       <InputLabel required={true}>Gender</InputLabel>
                       <Controller
-                        render={(props) => (
+                        render={() => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="gender"
+                            defaultValue={inputs.gender}
+                            onChange={handleInputChange}
                             label="Gender"
                           >
                             <MenuItem value="" disabled>
                               Gender
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>Male</MenuItem>
-                            <MenuItem value={'Freezer'}>Female</MenuItem>
-                            <MenuItem value={'Ice Maker'}>Other</MenuItem>
-                            {/* <MenuItem value={"Range"}>Range</MenuItem>
-                  <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
+                            <MenuItem value={"Male"}>Male</MenuItem>
+                            <MenuItem value={"Female"}>Female</MenuItem>
+                            <MenuItem value={"Other"}>Other</MenuItem>
                           </Select>
                         )}
                         name="appliance"
                         control={control}
-                        defaultValue=""
+                        // defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
                       {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
@@ -186,23 +183,24 @@ const PersonalInfo = () => {
                         render={(props) => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="income"
+                            defaultValue={inputs.income}
+                            onChange={handleInputChange}
                             label="Appliances"
                           >
                             <MenuItem value="" disabled>
                               Annual Income
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>
+                            <MenuItem value={"less then 500000"}>
                               less then 500000
                             </MenuItem>
-                            <MenuItem value={'Freezer'}>
+                            <MenuItem value={"More then 500000"}>
                               More then 500000
                             </MenuItem>
-                            <MenuItem value={'Ice Maker'}>
+                            <MenuItem value={"less then 1000000"}>
                               less then 1000000
                             </MenuItem>
-                            <MenuItem value={'Range'}>
+                            <MenuItem value={"More then 1000000"}>
                               More then 1000000
                             </MenuItem>
                             {/* <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
@@ -212,7 +210,7 @@ const PersonalInfo = () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
                       {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
@@ -232,18 +230,21 @@ const PersonalInfo = () => {
                         render={(props) => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="occupation"
+                            defaultValue={inputs.occupation}
+                            onChange={handleInputChange}
                             label="Appliances"
                           >
                             <MenuItem value="" disabled>
                               Occupation
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>
+                            <MenuItem value={"Private Sector"}>
                               Private Sector
                             </MenuItem>
-                            <MenuItem value={'Freezer'}>Govt. Sector</MenuItem>
-                            <MenuItem value={'Ice Maker'}>Self</MenuItem>
+                            <MenuItem value={"Govt. Sector"}>
+                              Govt. Sector
+                            </MenuItem>
+                            <MenuItem value={"Self"}>Self</MenuItem>
                             {/* <MenuItem value={"Range"}>Range</MenuItem>
                   <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
                           </Select>
@@ -252,7 +253,7 @@ const PersonalInfo = () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
                       {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
@@ -276,16 +277,19 @@ const PersonalInfo = () => {
                         render={(props) => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="experience"
+                            defaultValue={inputs.experience}
+                            onChange={handleInputChange}
                             label="Appliances"
                           >
                             <MenuItem value="" disabled>
                               Trading Experience
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>Begginer</MenuItem>
-                            <MenuItem value={'Freezer'}>Intermediate</MenuItem>
-                            <MenuItem value={'Ice Maker'}>Advanced</MenuItem>
+                            <MenuItem value={"Begginer"}>Begginer</MenuItem>
+                            <MenuItem value={"Intermediate"}>
+                              Intermediate
+                            </MenuItem>
+                            <MenuItem value={"Advanced"}>Advanced</MenuItem>
                             {/* <MenuItem value={"Range"}>Range</MenuItem>
                   <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
                           </Select>
@@ -294,7 +298,7 @@ const PersonalInfo = () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
                       {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
@@ -316,15 +320,16 @@ const PersonalInfo = () => {
                         render={(props) => (
                           <Select
                             size="large"
-                            value={props.value}
-                            onChange={props.onChange}
+                            name="political"
+                            defaultValue={inputs.political}
+                            onChange={handleInputChange}
                             label="Appliances"
                           >
                             <MenuItem value="" disabled>
                               Politically Exposed
                             </MenuItem>
-                            <MenuItem value={'Refrigerator'}>Yes</MenuItem>
-                            <MenuItem value={'Freezer'}>No</MenuItem>
+                            <MenuItem value={"yes"}>Yes</MenuItem>
+                            <MenuItem value={"no"}>No</MenuItem>
                             {/* <MenuItem value={"Ice Maker"}>Ice Maker</MenuItem>
                   <MenuItem value={"Range"}>Range</MenuItem>
                   <MenuItem value={"Trash Compactor"}>Trash Compactor</MenuItem> */}
@@ -334,7 +339,7 @@ const PersonalInfo = () => {
                         control={control}
                         defaultValue=""
                         rules={{
-                          required: 'Please Choose Your Appliance.',
+                          required: "Please Choose Your Appliance.",
                         }}
                       />
                       {/* <FormHelperText>{errors.appliance?.message}</FormHelperText> */}
@@ -348,7 +353,7 @@ const PersonalInfo = () => {
                   <Button
                     fullWidth="true"
                     type="submit"
-                    // onClick={smsVerify}
+                    onClick={handleSubmit}
                     className="btn-comman text-white"
                   >
                     Proceed

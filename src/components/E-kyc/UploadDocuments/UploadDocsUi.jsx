@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import './PersonalInfo.css';
-import { Container, Row, Col } from 'reactstrap';
-import { makeStyles } from '@material-ui/core';
-import Image from 'react-bootstrap/Image';
-import DigiModal from '../Modal/Modal';
-import { useForm } from 'react-hook-form';
-import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
-import Esign from '../DigitalSignature/Esign';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-
+import { Container, Row, Col } from "reactstrap";
+import { makeStyles } from "@material-ui/core";
+import Image from "react-bootstrap/Image";
+import Button from "@material-ui/core/Button";
+import Modal from "@material-ui/core/Modal";
+import Esign from "../DigitalSignature/Esign";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import { useHistory } from "react-router";
+import uploadImg from "../../../images/Upload_Documents_Illustration.png";
 const useStyles = makeStyles((theme) => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: "2px solid #000",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -32,6 +31,7 @@ function getModalStyle() {
   };
 }
 const AdhaarKyc = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [show, SetShow] = useState(false);
@@ -42,7 +42,9 @@ const AdhaarKyc = () => {
   const handleClose = () => {
     SetShow(false);
   };
-
+  const handleClick = () => {
+    history.push("/LastStep");
+  };
   const body = (
     <div
       style={modalStyle}
@@ -51,14 +53,14 @@ const AdhaarKyc = () => {
     >
       <Row
         style={{
-          display: 'flex',
-          justifyContent: 'space-between',
+          display: "flex",
+          justifyContent: "space-between",
         }}
       >
-        <p style={{ marginLeft: '12px' }}>Upload Signature</p>
+        <p style={{ marginLeft: "12px" }}>Upload Signature</p>
         <CloseRoundedIcon
           onClick={handleClose}
-          style={{ marginRight: '12px', cursor: 'pointer' }}
+          style={{ marginRight: "12px", cursor: "pointer" }}
         />
       </Row>
       <Esign />
@@ -72,7 +74,7 @@ const AdhaarKyc = () => {
           <Col md="6">
             <div className="form-info">
               <Row>
-                <Col style={{ marginLeft: '30px' }}>
+                <Col style={{ marginLeft: "30px" }}>
                   <h3 className="float-left ml=2">Upload Documents</h3>
                   <br />
                   <hr className="hr-personal color-gradiant" />
@@ -88,13 +90,13 @@ const AdhaarKyc = () => {
                 <br />
                 <Col
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    fontSize: '13px',
+                    display: "flex",
+                    flexDirection: "column",
+                    fontSize: "13px",
                   }}
                 >
                   <text>Upload a signed copy of your PAN Card</text>
-                  <text style={{ fontSize: '10px' }}>
+                  <text style={{ fontSize: "10px" }}>
                     Format: <b>JPG</b>,<b>PNG</b>,<b>PDF</b>
                   </text>
                 </Col>
@@ -105,9 +107,9 @@ const AdhaarKyc = () => {
                   // onClick={smsVerify}
                   className="btn-comman text-white"
                   style={{
-                    textTransform: 'capitalize',
-                    marginLeft: '10px',
-                    width: '150px',
+                    textTransform: "capitalize",
+                    marginLeft: "10px",
+                    width: "150px",
                   }}
                 >
                   Upload
@@ -124,9 +126,9 @@ const AdhaarKyc = () => {
                 <br />
                 <Col
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    fontSize: '13px',
+                    display: "flex",
+                    flexDirection: "column",
+                    fontSize: "13px",
                   }}
                 >
                   <text>
@@ -138,8 +140,8 @@ const AdhaarKyc = () => {
                 <br />
                 <Row
                   style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    justifyContent: "space-between",
                   }}
                 >
                   <Col md="6">
@@ -148,9 +150,9 @@ const AdhaarKyc = () => {
                       onClick={HandleOpen}
                       className="btn-comman text-white"
                       style={{
-                        textTransform: 'capitalize',
-                        marginLeft: '10px',
-                        width: '150px',
+                        textTransform: "capitalize",
+                        marginLeft: "10px",
+                        width: "150px",
                       }}
                     >
                       Digital Pad
@@ -167,12 +169,12 @@ const AdhaarKyc = () => {
                   <Col>
                     <Button
                       type="submit"
-                      // onClick={smsVerify}
+                      onClick={handleClick}
                       className="btn-comman text-white"
                       style={{
-                        textTransform: 'capitalize',
-                        marginLeft: '10px',
-                        width: '150px',
+                        textTransform: "capitalize",
+                        marginLeft: "10px",
+                        width: "150px",
                       }}
                     >
                       Upload Image
@@ -187,10 +189,7 @@ const AdhaarKyc = () => {
             md="5"
             // style={{ border: '2px solid black' }}
           >
-            <Image
-              src={require('../../../images/Upload_Documents_Illustration.png')}
-              fluid
-            />
+            <Image src={uploadImg} fluid />
           </Col>
         </Row>
       </Container>

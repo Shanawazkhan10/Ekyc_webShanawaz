@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'reactstrap';
-// import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
-// import { Label, FormGroup } from 'reactstrap';
-import Image from 'react-bootstrap/Image';
-import {
-  makeStyles,
-  //   MenuItem,
-  //   InputLabel,
-  //   Button,
-  //   FormControl,
-  Button,
-  FormControlLabel,
-  Checkbox,
-  Select,
-} from '@material-ui/core';
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import { Container, Row, Col } from "reactstrap";
+import Image from "react-bootstrap/Image";
+import accImg from "../../../images/Account_Opening_Fee_Illustration.png";
+import { Button, FormControlLabel, Checkbox } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 const OpenAcc = () => {
+  const history = useHistory();
+  const handleClick = () => {
+    history.push("/AdhaarKYC");
+  };
   return (
     <div>
       <Container>
@@ -27,8 +20,8 @@ const OpenAcc = () => {
               <Row>
                 <Col>
                   <h3 className="float-left">
-                    Account Opening is{' '}
-                    <b style={{ color: '#3457D5' }}>FREE !</b>
+                    Account Opening is{" "}
+                    <b style={{ color: "#3457D5" }}>FREE !</b>
                   </h3>
                   <br />
                   <hr className="hr-personal color-gradiant" />
@@ -36,20 +29,20 @@ const OpenAcc = () => {
               </Row>
               <Row
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  fontSize: '13px',
-                  border: '1px solid #3457D5',
-                  borderRadius: '10px',
-                  padding: '10px',
+                  // display: 'flex',
+                  flexDirection: "column",
+                  fontSize: "13px",
+                  border: "1px solid #3457D5",
+                  borderRadius: "10px",
+                  padding: "10px",
                 }}
               >
                 <Col
                   style={{
-                    display: 'flex',
+                    // display: 'flex',
                     // border: '4px solid blue',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    justifyContent: "space-between",
+                    alignItems: "center",
                   }}
                 >
                   <FormControlLabel
@@ -72,20 +65,20 @@ const OpenAcc = () => {
                   ₹20
                 </Col>
 
-                <text style={{ marginLeft: '30px' }}>
+                <text style={{ marginLeft: "30px" }}>
                   Buy and sell shares, mutual funds and derivatives on NSE and
                   BSE
                 </text>
 
                 <Col>
                   <Col>
-                    <div style={{ display: 'flex', flexDirection: 'row  ' }}>
-                      {' '}
+                    <div style={{ display: "flex", flexDirection: "row  " }}>
+                      {" "}
                       <FormControlLabel
                         style={{
                           // border: '2px solid red',
-                          display: 'flex',
-                          flexDirection: 'row',
+                          display: "flex",
+                          flexDirection: "row",
                         }}
                         control={
                           <Checkbox
@@ -101,8 +94,8 @@ const OpenAcc = () => {
                       <FormControlLabel
                         style={{
                           // border: '2px solid red',
-                          display: 'flex',
-                          flexDirection: 'row',
+                          display: "flex",
+                          flexDirection: "row",
                         }}
                         control={
                           <Checkbox
@@ -114,12 +107,12 @@ const OpenAcc = () => {
                           />
                         }
                         label="F&O"
-                      />{' '}
+                      />{" "}
                       <FormControlLabel
                         style={{
                           // border: '2px solid red',
-                          display: 'flex',
-                          flexDirection: 'row',
+                          display: "flex",
+                          flexDirection: "row",
                         }}
                         control={
                           <Checkbox
@@ -131,12 +124,12 @@ const OpenAcc = () => {
                           />
                         }
                         label="Currency"
-                      />{' '}
+                      />{" "}
                       <FormControlLabel
                         style={{
                           // border: '2px solid red',
-                          display: 'flex',
-                          flexDirection: 'row',
+                          display: "flex",
+                          flexDirection: "row",
                         }}
                         control={
                           <Checkbox
@@ -152,7 +145,7 @@ const OpenAcc = () => {
                     </div>
                   </Col>
                 </Col>
-                <text style={{ marginLeft: '30px' }}>
+                <text style={{ marginLeft: "30px" }}>
                   ₹<b>20</b> per order for F&O, Currency and Commodity
                 </text>
               </Row>
@@ -161,14 +154,14 @@ const OpenAcc = () => {
               className="mt-4"
               md="7"
               style={{
-                borderTop: '1px solid #8C92AC',
-                borderBottom: '1px solid #8C92AC',
-                padding: '10px',
+                borderTop: "1px solid #8C92AC",
+                borderBottom: "1px solid #8C92AC",
+                padding: "10px",
               }}
             >
-              <Col style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Col style={{ display: "flex", justifyContent: "space-between" }}>
                 <text>TOTAL</text>
-                <b style={{ color: '#3457D5' }}>₹20</b>
+                <b style={{ color: "#3457D5" }}>₹20</b>
               </Col>
             </Row>
           </Col>
@@ -179,16 +172,19 @@ const OpenAcc = () => {
               //   marginLeft: '30px',
               //   border: '1px solid blue',
               // }}
-              src={require('../../../images/Account_Opening_Fee_Illustration.png')}
+              src={accImg}
               fluid
             />
+            <br />
+            <br />
+            {/* <br /> */}
             <Col className="ml-5 mt-4">
               <Button
                 // fullWidth="true"
                 type="submit"
-                // onClick={smsVerify}
+                onClick={handleClick}
                 className="btn-comman text-white"
-                style={{ textTransform: 'capitalize' }}
+                style={{ textTransform: "capitalize" }}
               >
                 Proceed
               </Button>
